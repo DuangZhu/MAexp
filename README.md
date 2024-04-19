@@ -12,6 +12,16 @@ MAexp, a generic high-efficiency platform designed for multi-agent exploration, 
 There are four kings of scenarios in MAexp: Random Obstacle, Maze, Indoor and Outdoor.
 
 <img src=imgs/scene_00.png  />
+
+<table><tr>
+<td><img src="imgs/1.gif" alt="Description of GIF 1" style="width: 100%;" /></td>
+<td><img src="imgs/2.gif" alt="Description of GIF 2" style="width: 100%;" /></td>
+</tr></table>
+
+
+
+
+
 If you find this project useful, please consider giving it a star on GitHub! It helps the project gain visibility and supports the development. Thank you!
 
 
