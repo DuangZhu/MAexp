@@ -1,7 +1,6 @@
 <h1 align="center">
-  <br> 
-  <span style="font-size: 30px;">MAexp</span>
-  <br> <!-- 在描述文字之前再添加一个换行 -->
+  <span style="font-size: 40px;">MAexp</span> <!-- 将字体大小从30px调整到40px -->
+  <br> <!-- 在描述文字之前的换行保持不变 -->
   A Generic Platform for RL-based Multi-Agent Exploration
 </h1>
 
