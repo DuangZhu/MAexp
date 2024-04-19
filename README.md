@@ -1,7 +1,7 @@
 <h1 align="center">
   <br> 
-  MAexp
-  <br>
+  <span style="font-size: 30px;">MAexp</span>
+  <br> <!-- 在描述文字之前再添加一个换行 -->
   A Generic Platform for RL-based Multi-Agent Exploration
 </h1>
 
