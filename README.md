@@ -2,7 +2,13 @@
 
 MAexp, a generic high-efficiency platform designed for multi-agent exploration, encompassing a diverse range of **scenarios** and **MARL algorithms**. The platform is developed in Python to smoothly integrate with existing reinforcement learning algorithms, and it is equally applicable to traditional exploration methods. In an effort to bridge the sim-to-real gap, all maps and agent properties within MAexp are modelled **continuously**, incorporating realistic physics to closely mirror real-world exploration. The framework of MAexp is as follow:
 
-<img src=imgs/logo1.png width=75% />
+<img src=imgs/platform2_00.png  />
+
+There are four kings of scenarios in MAexp: Random Obstacle, Maze, Indoor and Outdoor.
+
+<img src=imgs/scene_00.png  />
+If you find this project useful, please consider giving it a star on GitHub! It helps the project gain visibility and supports the development. Thank you!
+
 
 ## Quick Start
 
@@ -315,8 +321,7 @@ python env_v7.py --yaml_file ./yaml/maze.yaml --is_capture
 
 ### Larger swarm
 
-MAexp
-
+MAexp can also accommodate a large number of robots as long as `communication` and `action generation strategies` are properly adjusted for enhanced efficiency.
 
 
 ### Citation
