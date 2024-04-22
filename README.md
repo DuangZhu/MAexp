@@ -336,8 +336,7 @@ python env_v7.py --yaml_file ./yaml/maze.yaml --is_capture
 
 ### Larger swarm
 
-MAexp can also accommodate a large number of robots as long as `communication` and `action generation strategies` are properly adjusted for enhanced efficiency.
-
+MAexp can also accommodate a large number of robots, provided that `communication` and `action generation strategies` are properly adjusted to avoid `CUDA out-of-memory` errors.
 
 ### Citation
 
