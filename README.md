@@ -52,102 +52,16 @@ $ pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 -
 
 
 ### Preparation
-
-(1) **Create a file** named `att.yaml` in the directory `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/models/configs/`. The contents of the file should be as follows:
-
-```yaml
-model_arch_args:
-  core_arch: "att"
-```
-
-
-
-(2) **Modify the code** of MARLLib.
+(1) **Modify the code** of MARLLib and Ray.
 
 - `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/algos/utils/centralized_critic.py` 
 
-```python
-# Line 130 
-convert_to_torch_tensor(
-	sample_batch["state"], policy.device),
-# Change to Below
-convert_to_torch_tensor(
-	sample_batch["obs"], policy.device),
+```
+$ cd MAexp
+$ python modify.py
 ```
 
-- `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/algos/core/CC/mappo.py` 
-
-```python
-# Line 59
-model.value_function = lambda: policy.model.central_value_function(train_batch["state"],
-# Change to Below
-model.value_function = lambda: policy.model.central_value_function(train_batch["obs"],
-```
-- `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/algos/core/CC/matrpo.py` 
-```python
-# Line 60
-model.value_function = lambda: policy.model.central_value_function(train_batch["state"],
-# Change to Below
-model.value_function = lambda: policy.model.central_value_function(train_batch["obs"],
-```
-
-- `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/algos/utils/trust_regions.py` 
-
-```python
-# Modify the function: update_critic
-def update_critic(self, critic_loss):
-    critic_loss_grad = torch.autograd.grad(critic_loss, self.critic_parameters, allow_unused=True)
-    new_params = (
-            parameters_to_vector(self.critic_parameters) - flat_grad(
-        critic_loss_grad) * TrustRegionUpdator.critic_lr
-    )
-    vector_to_parameters(new_params, self.critic_parameters)
-    return None
-# Change to Below
-def update_critic(self, critic_loss):
-    critic_loss_grad = torch.autograd.grad(critic_loss, self.critic_parameters, allow_unused=True)
-    none_grad_indices = [i for i, grad in enumerate(critic_loss_grad) if grad is not None]
-    if len(none_grad_indices) == len(self.critic_parameters):
-        new_params = (
-            parameters_to_vector(self.critic_parameters) - flat_grad(
-        critic_loss_grad) * TrustRegionUpdator.critic_lr)
-        vector_to_parameters(new_params, self.critic_parameters)
-    else:
-        critic_parameters = [self.critic_parameters[i] for i in none_grad_indices]
-        new_params = (
-                parameters_to_vector(critic_parameters) - flat_grad(
-            critic_loss_grad) * TrustRegionUpdator.critic_lr
-        )
-        vector_to_parameters(new_params, critic_parameters)
-    return None
-```
-
-- `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/algos/utils/mixing_critic.py` 
-
-```python
-# Line 55
-obs_dim = get_dim(custom_config["space_obs"]["obs"].shape) 
-# Change to Below
-obs_dim = sum(np.prod(box.shape) for box in custom_config["space_obs"].spaces.values())
-```
-
-- `/Path/To/envs/maexp/lib/python3.8/site-packages/ray/rllib/utils/torch_ops.py` 
-
-```python
-# Line 121
-else:
-# ----- add these two lines -----------
-    if item == None: 
-        item = False
-# ------------------------------------
-    tensor = torch.from_numpy(np.asarray(item))
-# Floatify all float64 tensors.
-if tensor.dtype == torch.double:
-    tensor = tensor.float()
-return tensor if device is None else tensor.to(device)
-```
-
-(3) Change the parameters of **Ray** and **MARL algorithms** as follow:
+(2) Change the parameters of **Ray** and **MARL algorithms** as follow:
 
 Ray:  `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/ray/ray.yaml`
 
@@ -265,7 +179,7 @@ algo_args:
   mixer: "qmix" # vdn
 ```
 
-(4) Data Preparation
+(3) Data Preparation
 
 Before you begin, you need to download the dataset and place it in the root directory of the project. Follow these steps:
 
