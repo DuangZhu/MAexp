@@ -247,7 +247,14 @@ python env_v7.py --yaml_file ./yaml/maze.yaml --is_capture
 
 ### Larger swarm
 
-MAexp can also accommodate a large number of robots, provided that `communication` and `action generation strategies` are properly adjusted to avoid `CUDA out-of-memory` errors.
+MAexp can also accommodate a large number of robots, provided that `communication` and `action generation strategies` are properly adjusted to avoid `CUDA out-of-memory` errors while training the policy.
+You can visual the environment of random walk strategy with following step:
+(1) Please comment out the section in `env_v7.py` where the MARL training is used, and enable the code at the bottom that employs the random walk strategy.
+(2) Then run this in the terminal
+
+```
+python env_v7.py --yaml_file ./yaml/outdoor_large_swarm.yaml
+```
 
 ### Citation
 
