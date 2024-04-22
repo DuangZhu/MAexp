@@ -269,9 +269,9 @@ algo_args:
 
 Before you begin, you need to download the dataset and place it in the root directory of the project. Follow these steps:
 
-1. Download the dataset from the provided link: [Google Drive](https://drive.google.com/file/d/1PjEEjWzMVaUsOPfpQyYhwIVME-WpJCMv/view?usp=drive_link) or .
+1. Download the dataset from the provided link: [Google Drive](https://drive.google.com/file/d/1PjEEjWzMVaUsOPfpQyYhwIVME-WpJCMv/view?usp=drive_link) or [Baidu Netdisk](https://pan.baidu.com/s/1lX3-eQxPb_e4cZ_OqjiJbA?pwd=jrs1).
 2. Extract the downloaded file.
-3. Copy or move the dataset to the root directory of this project.
+3. Copy or move the dataset to the root directory of this project.https://pan.baidu.com/s/1lX3-eQxPb_e4cZ_OqjiJbA?pwd=jrs1
 
 
 
@@ -341,7 +341,7 @@ MAexp can also accommodate a large number of robots as long as `communication` a
 
 ### Citation
 
-If you use MAexp in your research, please cite the [MAexp paper]().
+If you use MAexp in your research, please cite the [MAexp paper](https://arxiv.org/abs/2404.12824).
 
 ```tex
 @misc{zhu2024maexp,
