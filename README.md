@@ -180,7 +180,7 @@ algo_args:
 
 Before you begin, you need to download the dataset and place it in the root directory of the project. Follow these steps:
 
-1. Download the dataset from the provided link: [Google Drive](https://drive.google.com/file/d/1PjEEjWzMVaUsOPfpQyYhwIVME-WpJCMv/view?usp=drive_link) or [Baidu Netdisk](https://pan.baidu.com/s/1lX3-eQxPb_e4cZ_OqjiJbA?pwd=jrs1).
+1. Download the dataset from the provided link: [Google Drive](https://drive.google.com/file/d/1PjEEjWzMVaUsOPfpQyYhwIVME-WpJCMv/view?usp=drive_link) or [Baidu Netdisk]([https://pan.baidu.com/s/1lX3-eQxPb_e4cZ_OqjiJbA?pwd=jrs1](https://pan.baidu.com/share/init?surl=n-PYbfAluBkw7HPPGXJfxg&pwd=1234)).
 2. Extract the downloaded file.
 3. Copy or move the dataset to the root directory of this project.
 
@@ -260,7 +260,7 @@ python env_v7.py --yaml_file ./yaml/outdoor_large_swarm.yaml
 
 ### Citation
 
-If you use MAexp in your research, please cite the [MAexp paper](https://arxiv.org/abs/2404.12824).
+If you use MAexp in your research, please cite the [MAexp paper](https://arxiv.org/abs/2404.12824) (accepted by ICRA 2024, see you in Yokohama~).
 
 ```tex
 @misc{zhu2024maexp,
