@@ -205,7 +205,7 @@ Map:
   scene: 'maze' # scenarios name, could not change
 ```
 
-(2) Check the parameters in `env_v7.py`
+(2) Check the parameters in `env_v7.py`. If you need to debug, please turn `local_model` to `True` and `num_work` to `1`.
 
 ```python
 # num_workers represent the number of parallel environments for sampling; local_model use False for trainin, while use True for debug. 
