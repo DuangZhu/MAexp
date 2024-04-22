@@ -1,0 +1,31 @@
+device: 'cuda'
+num_agent: 3
+is_train: True
+algo: 'matrpo'
+
+Map:
+  training_map_num: 1
+  map_resolution: 1.0
+  region: 8
+  max_global_step: 15
+  map_list: ['map0','map2']
+  scene: 'random'
+
+Agent:
+  DT: 0.1
+  max_commu_dis: 80.0
+  agent_length: 1.5
+  agent_wide: 1.0
+  max_speed: 6.0
+  use_all_points_collision: False
+  agent_resolution: 5
+  is_lidar: True
+  lidar_range: 10.0
+  max_a: 2.0
+
+navigation config:
+  collision_threshold: 0.75
+  vel_resolution: 3
+  delta_resolution: 25
+  local_step: 40
+  multi_para: 3.0

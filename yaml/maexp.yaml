@@ -1,0 +1,13 @@
+env: maexp
+
+env_args:
+  map_name: "MAexp" 
+  continuous_actions: True
+  max_cycles: 2
+  max_episode_steps: 20
+  is_train: True
+  algo: 'mappo'
+
+mask_flag: False
+global_state_flag: False
+opp_action_in_cc: False

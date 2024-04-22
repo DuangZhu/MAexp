@@ -1,0 +1,31 @@
+device: 'cuda'
+num_agent: 3
+is_train: True
+algo: 'ippo'
+
+Map:
+  training_map_num: 1
+  map_resolution: 1.0
+  region: 8
+  max_global_step: 30 
+  map_list: ['map1','map19']
+  scene: 'maze'
+
+Agent:
+  DT: 0.1
+  max_commu_dis: 800.0
+  agent_length: 1.5
+  agent_wide: 1.0
+  max_speed: 8.0
+  use_all_points_collision: False
+  agent_resolution: 5
+  is_lidar: True
+  lidar_range: 10.0
+  max_a: 2.0
+
+navigation config:
+  collision_threshold: 0.75
+  vel_resolution: 3
+  delta_resolution: 25
+  local_step: 20 
+  multi_para: 4.0

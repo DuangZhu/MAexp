@@ -1,0 +1,31 @@
+device: 'cuda'
+num_agent: 3
+is_train: True
+algo: 'ippo'
+
+Map:
+  training_map_num: 1
+  map_resolution: 0.1
+  region: 8
+  max_global_step: 15
+  map_list: ['Hometown'] # Beach, Dunmor, Goffs, Hambleton, Hometown
+  scene: 'indoor'
+
+Agent:
+  DT: 0.1
+  max_commu_dis: 80.0
+  agent_length: 0.15
+  agent_wide: 0.1
+  max_speed: 0.6
+  use_all_points_collision: False
+  agent_resolution: 5
+  is_lidar: True
+  lidar_range: 1.0
+  max_a: 0.2
+
+navigation config:
+  collision_threshold: 0.06
+  vel_resolution: 3
+  delta_resolution: 21
+  local_step: 40
+  multi_para: 4.2
