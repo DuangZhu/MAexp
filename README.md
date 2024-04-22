@@ -344,11 +344,13 @@ MAexp can also accommodate a large number of robots as long as `communication` a
 If you use MAexp in your research, please cite the [MAexp paper]().
 
 ```tex
-@article{hu2022marllib,
-  author  = {Siyi Hu and Yifan Zhong and Minquan Gao and Weixun Wang and Hao Dong and Xiaodan Liang and Zhihui Li and Xiaojun Chang and Yaodong Yang},
-  title   = {MARLlib: A Scalable and Efficient Multi-agent Reinforcement Learning Library},
-  journal = {Journal of Machine Learning Research},
-  year    = {2023},
+@misc{zhu2024maexp,
+      title={MAexp: A Generic Platform for RL-based Multi-Agent Exploration}, 
+      author={Shaohao Zhu and Jiacheng Zhou and Anjun Chen and Mingming Bai and Jiming Chen and Jinming Xu},
+      year={2024},
+      eprint={2404.12824},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO}
 }
 ```
 
