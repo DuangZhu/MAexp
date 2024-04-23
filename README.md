@@ -21,7 +21,7 @@ There are four kings of scenarios in MAexp: Random Obstacle, Maze, Indoor and Ou
 
 
 
-
+An introduction video can be seen [here](https://www.bilibili.com/video/BV12w4m1y7Qm/?vd_source=4a84fda80f7a87775762c3f89840bbfd)
 If you find this project useful, please consider giving it a star on GitHub! It helps the project gain visibility and supports the development. Thank you!
 
 
