@@ -262,7 +262,7 @@ python env_v7.py --yaml_file ./yaml/outdoor_large_swarm.yaml
 
 ### Citation
 
-If you use MAexp in your research, please cite the [MAexp paper](https://arxiv.org/abs/2404.12824) (accepted by ICRA 2024, see you in Yokohama~).
+If you use MAexp in your research, please cite the [MAexp paper](https://ieeexplore.ieee.org/document/10611573) (accepted by ICRA 2024, see you in Yokohama~).
 
 ```tex
 @misc{zhu2024maexp,
