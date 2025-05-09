@@ -55,7 +55,7 @@ class Multiagent_exploration(MultiAgentEnv):
             'Number_agent': self.config['num_agent'],
             'Steps': 0,
             'Episode': 0,
-            'is_destroy': np.zeros(self.config['num_agent'], dtype=bool), # 储存智能体是否装上障碍物或者其他智能体
+            'is_destroy': np.zeros(self.config['num_agent'], dtype=bool), 
             'Explore_ratio': 0.,
             '85% Coverage': 0.,
             '95% Coverage': 0.,
@@ -136,10 +136,10 @@ class Multiagent_exploration(MultiAgentEnv):
         }
         self.all_area = len(self.map_freespace)
         if not self.config['is_train']:
-            try: # 尝试读取现有的JSON数据 
+            try: 
                 with open(self.config['result_file'], 'r') as f: 
                     data = json.load(f) 
-            except FileNotFoundError: # 如果文件不存在，初始化一个空字典来存储数据 
+            except FileNotFoundError:  
                 data = {} 
             if not self.infos['Episode'] == 0:
                 for key, value in self.infos.items(): 
@@ -181,7 +181,7 @@ class Multiagent_exploration(MultiAgentEnv):
         self.agents_m = {}
         self.reward_list = {}
         self.path_len = torch.zeros(self.config['num_agent'], device = self.config['device'])
-        self.explore_merged_map = torch.zeros((1, 3), device=self.config['device']) # 本次探索区域
+        self.explore_merged_map = torch.zeros((1, 3), device=self.config['device']) 
         '''
         init agent randomly
         '''
@@ -284,24 +284,21 @@ class Multiagent_exploration(MultiAgentEnv):
             for geometry in self.vis_bound:
                 self.vis.add_geometry(geometry)
             
-            # 添加障碍物点云用于可视化
             map_obstacles_o3d = o3d.geometry.PointCloud()
             map_obstacles_o3d.points = o3d.utility.Vector3dVector(self.map_obstacles.cpu())
             map_obstacles_o3d.paint_uniform_color([0.6, 0.6, 0.6])
             self.vis.add_geometry(map_obstacles_o3d)
             
-            # 添加已探索区域点云用于可视化
             self.explored_space_o3d = o3d.geometry.PointCloud()
             self.explored_space_o3d.points = o3d.utility.Vector3dVector(self.map_freespace.cpu())
             self.vis.add_geometry(self.explored_space_o3d)
             
-            # 添加未探索区域点云用于可视化
             self.map_freespace_o3d = o3d.geometry.PointCloud()
             self.map_freespace_o3d.points = o3d.utility.Vector3dVector(self.map_freespace.cpu())
             self.vis.add_geometry(self.map_freespace_o3d)
         return obs
     
-    def step(self, action, encoder): # action是三维的
+    def step(self, action, encoder):
         self.infos['Steps'] += 1
         final_rewards = {}
         sum_rewards = np.zeros(self.config['num_agent'])
@@ -657,7 +654,6 @@ class Multiagent_exploration(MultiAgentEnv):
             save_path = '/home/shaohao/Documents/MAexp/img'
             subfolders = ['all', 'agent_0', 'agent_1', 'agent_2']
             if not os.path.exists(save_path):
-                # 如果文件夹不存在，则创建它
                 os.makedirs(save_path)
                 print(f"Folder '{save_path}' created!")
                 for subfolder in subfolders:
@@ -685,14 +681,14 @@ class Multiagent_exploration(MultiAgentEnv):
         load pointcloud map
         """
         if map_count is not None:
-            self.map_freespace = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_freespace.npy")).float().to(self.config['device'])
-            self.map_obstacles = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_obstacles.npy")).float().to(self.config['device'])
-            self.map_boundary = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_boundary.npy")).float().to(self.config['device'])
+            self.map_freespace = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_freespace.npy")).float().to(self.config['device'])
+            self.map_obstacles = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_obstacles.npy")).float().to(self.config['device'])
+            self.map_boundary = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_boundary.npy")).float().to(self.config['device'])
             if self.config['scene'] in ['maze', 'random', 'maze9', 'random2','maze_4_change', 'random3']:
                 self.map_w = torch.tensor(125).to(self.config['device'])
                 self.map_h = torch.tensor(125).to(self.config['device'])
             elif self.config['scene'] == 'indoor':
-                map = np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/indoor/"+self.config['map_list'][map_count]+"_map.npy")
+                map = np.load("./map/indoor/"+self.config['map_list'][map_count]+"_map.npy")
                 self.map_w = torch.tensor(map.shape[0]/2 * self.config['map_resolution'])
                 self.map_h = torch.tensor(map.shape[1]/2 * self.config['map_resolution'])
             elif self.config['scene'] == 'outdoor':
@@ -702,9 +698,9 @@ class Multiagent_exploration(MultiAgentEnv):
             if self.config['scene'] in ['maze', 'random', 'maze9']:
                 self.map_w = torch.tensor(125).to(self.config['device'])
                 self.map_h = torch.tensor(125).to(self.config['device'])
-                self.map_freespace = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/map"+str(id)+"_freespace.npy")).float().to(self.config['device'])
-                self.map_obstacles = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/map"+str(id)+"_obstacles.npy")).float().to(self.config['device'])
-                self.map_boundary = torch.from_numpy(np.load("/remote-home/ums_zhushaohao/new/2024/MAexp/map/"+self.config['scene']+"/map"+str(id)+"_boundary.npy")).float().to(self.config['device'])
+                self.map_freespace = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_freespace.npy")).float().to(self.config['device'])
+                self.map_obstacles = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_obstacles.npy")).float().to(self.config['device'])
+                self.map_boundary = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_boundary.npy")).float().to(self.config['device'])
 
     
     def get_env_info(self):
