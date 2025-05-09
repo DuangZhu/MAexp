@@ -885,3 +885,32 @@ if __name__ == '__main__':
                   restore_path={'params_path': "/remote-home/ums_zhushaohao/new/2024/MAexp/exp_results/vda2c_vit_crossatt_MAexp/VDA2CTrainer_maexp_MAexp_a0c78_00000_0_2024-12-23_02-57-21/params.json",  # experiment configuration
                             'model_path': "/remote-home/ums_zhushaohao/new/2024/MAexp/exp_results/vda2c_vit_crossatt_MAexp/VDA2CTrainer_maexp_MAexp_845f5_00000_0_2024-12-19_23-32-31/checkpoint_008100/checkpoint-8100"},
                               local_mode=True, num_workers = 0, share_policy='all')
+
+
+
+
+# if __name__ == "__main__":
+#     """
+#     You can use this to visual the environment with random work strategy.
+#     """
+
+#     def generate_random_action(config):
+#         action = {}
+#         for i in range(config['num_agent']):
+#             agent_key = f"agent_{i}"
+#             random_integer = random.randint(0, 63)
+#             random_floats = [round(random.uniform(-1, 1), 2) for _ in range(2)]
+#             action[agent_key] = (random_integer, random_floats)
+#         return action
+    
+#     np.random.seed(2)
+#     env_config = get_config()
+#     env = Multiagent_exploration(env_config)
+#     logging.info("Environment created successfully!")
+#     env.reset()
+#     t_start = time.time()
+#     for i in range(20):
+#         action = generate_random_action(env_config)
+#         env.step(action)
+#     t_end = time.time()
+#     print("Spend time", t_end - t_start)
