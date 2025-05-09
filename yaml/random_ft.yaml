@@ -1,0 +1,31 @@
+device: 'cuda'
+num_agent: 3
+is_train: True
+algo: 'ft_apf' # can be ft_voronoi, ft_apf, ft_rrt; if collect data use ft_voronoi
+
+Map:
+  training_map_num: 10
+  map_resolution: 1.0
+  region: 8
+  max_global_step: 30
+  map_list: ['map71', 'map72', 'map73', 'map74', 'map75', 'map76', 'map77', 'map78', 'map79', 'map80']
+  scene: 'random3'
+
+Agent:
+  DT: 0.1
+  max_commu_dis: 8000.0
+  agent_length: 1.5
+  agent_wide: 1.0
+  max_speed: 6.0
+  use_all_points_collision: False
+  agent_resolution: 5
+  is_lidar: True
+  lidar_range: 12.0
+  max_a: 2.0
+
+navigation config:
+  collision_threshold: 0.75
+  vel_resolution: 3
+  delta_resolution: 25
+  local_step: 30
+  multi_para: 3.0

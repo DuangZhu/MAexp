@@ -1,14 +1,15 @@
 device: 'cuda'
 num_agent: 3
 is_train: True
-algo: 'ippo'
+algo: 'vda2c'
 
 Map:
-  training_map_num: 1
+  training_map_num: 70
   map_resolution: 1.0
   region: 8
-  max_global_step: 30 
-  map_list: ['map1','map19']
+  max_global_step: 30
+  map_list: ['map0', 'map1', 'map2', 'map3', 'map4', 'map5', 'map6', 'map7', 'map8', 'map9', 'map10', 'map11', 'map12', 'map13', 'map14', 'map15', 'map16', 'map17', 'map18', 'map19', 'map20', 'map21', 'map22', 'map23', 'map24', 'map25', 'map26', 'map27', 'map28', 'map29', 'map30', 'map31', 'map32', 'map33', 'map34', 'map35', 'map36', 'map37', 'map38', 'map39', 'map40', 'map41', 'map42', 'map43', 'map44', 'map45', 'map46', 'map47', 'map48', 'map49', 'map50', 'map51', 'map52', 'map53', 'map54', 'map55', 'map56', 'map57', 'map58', 'map59', 'map60', 'map61', 'map62', 'map63', 'map64', 'map65', 'map66', 'map67', 'map68', 'map69']
+  # map_list: ['map70', 'map71', 'map72', 'map73', 'map74', 'map75', 'map76', 'map77', 'map78', 'map79']
   scene: 'maze'
 
 Agent:
