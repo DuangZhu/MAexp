@@ -267,6 +267,13 @@ You can visual the environment of random walk strategy with following step:
 python env_v7.py --yaml_file ./yaml/outdoor_large_swarm.yaml
 ```
 
+### Planning-based Methods
+We’ve incorporated three planning‑based methods for benchmarking and data collection. All three algorithms are adapted from the [MAANS](https://github.com/zoeyuchao/maans) to work within our framework. These methods are from the following paper:
+- **SMMR-Explore**: [SMMR-Explore: SubMap-based Multi-Robot Exploration System with Multi-robot Multi-target Potential Field Exploration Method](https://dl.acm.org/doi/10.1109/ICRA48506.2021.9561328)
+- **Voronoi**: [Voronoi-Based Multi-Robot Autonomous Exploration in Unknown Environments via Deep Reinforcement Learning](https://ieeexplore.ieee.org/document/9244647)
+- **RRT-based Method**: [Autonomous robotic exploration based on multiple rapidly-exploring randomized trees](https://ieeexplore.ieee.org/document/8202319)
+
+You could run env_v8_ft.py to evaluate the planning-based methods. You can modify the settings in `./yaml/maze_ft.yaml`; the `algo` can be ft_voronoi, ft_apf and ft_rrt.
 ### Citation
 
 If you use MAexp in your research, please cite the [MAexp paper](https://ieeexplore.ieee.org/document/10611573) (accepted by ICRA 2024, see you in Yokohama~).
