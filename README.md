@@ -214,7 +214,7 @@ Map:
   scene: 'maze' # scenarios name, could not change
 ```
 
-(2) Check the parameters in `env_v7.py`. If you need to debug, please turn `local_model` to `True` and `num_work` to `1`.
+(2) Check the parameters in `env_v8.py`. If you need to debug, please turn `local_model` to `True` and `num_work` to `1`.
 
 ```python
 # num_workers represent the number of parallel environments for sampling; local_model use False for trainin, while use True for debug. 
@@ -224,14 +224,14 @@ method.fit(env, model, stop={'episode_reward_mean': 200000, 'timesteps_total': 1
 (3) Then run this in the terminal
 
 ```
-python env_v7.py --yaml_file ./yaml/maze.yaml
+python env_v8.py --yaml_file ./yaml/maze.yaml
 ```
 
 ### Testing
 
 (1) Change the parameters: **'is_train'** must be 'False'.
 
-(2) Change the parameter in 'env_v7.py', add the `params_path` and `model_path`.
+(2) Change the parameter in 'env_v8.py', add the `params_path` and `model_path`.
 
 ```python
 # params_path is the training parameters path; model_path is the checkpoint path;local_mode must be 'True'.
@@ -243,13 +243,13 @@ local_mode=True, num_workers = 0, share_policy='all')
 (3) Then run this in the terminal
 
 ```cmd
-python env_v7.py --yaml_file ./yaml/maze.yaml
+python env_v8.py --yaml_file ./yaml/maze.yaml
 ```
 
 If you want to save the images, use this:
 
 ```
-python env_v7.py --yaml_file ./yaml/maze.yaml --is_capture
+python env_v8.py --yaml_file ./yaml/maze.yaml --is_capture
 ```
 
 
@@ -259,12 +259,12 @@ python env_v7.py --yaml_file ./yaml/maze.yaml --is_capture
 MAexp can also accommodate a large number of robots, provided that `communication` and `action generation strategies` are properly adjusted to avoid `CUDA out-of-memory` errors while training the policy.
 You can visual the environment of random walk strategy with following step:
 
-(1) Please comment out the section in `env_v7.py` where the MARL training is used, and enable the code at the bottom that employs the random walk strategy.
+(1) Please comment out the section in `env_v8.py` where the MARL training is used, and enable the code at the bottom that employs the random walk strategy.
 
 (2) Then run this in the terminal
 
 ```
-python env_v7.py --yaml_file ./yaml/outdoor_large_swarm.yaml
+python env_v8.py --yaml_file ./yaml/outdoor_large_swarm.yaml
 ```
 
 ### Planning-based Methods
