@@ -4,6 +4,13 @@
   A Generic Platform for RL-based Multi-Agent Exploration
 </h1>
 
+## 🎉 MAexp v1.5 Is Here! 🚀
+
+We’re thrilled to announce the release of **MAexp v1.5**, now open‑sourced! In this version we’ve added:
+
+- 🔍 **Three new planning‑based algorithms**  
+- 🌟 **[TaskExp](https://github.com/DuangZhu/TaskExp)**: a multi‑task pre‑training algorithm that helps MARL learn a truly generalizable policy
+---
 
 MAexp, a generic high-efficiency platform designed for multi-agent exploration, encompassing a diverse range of **scenarios** and **MARL algorithms**. The platform is developed in Python to smoothly integrate with existing reinforcement learning algorithms, and it is equally applicable to traditional exploration methods. In an effort to bridge the sim-to-real gap, all maps and agent properties within MAexp are modelled **continuously**, incorporating realistic physics to closely mirror real-world exploration. The framework of MAexp is as follow:
 
