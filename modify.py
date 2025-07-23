@@ -26,7 +26,8 @@ if __name__ == "__main__":
     ("./env_utils/Changed_file/matrpo.py", "marllib/marl/algos/core/CC/matrpo.py"),
     ("./env_utils/Changed_file/trust_regions.py", "marllib/marl/algos/utils/trust_regions.py"),
     ("./env_utils/Changed_file/mixing_critic.py", "marllib/marl/algos/utils/mixing_critic.py"),
-    ("./env_utils/Changed_file/torch_ops.py", "ray/rllib/utils/torch_ops.py")
+    ("./env_utils/Changed_file/torch_ops.py", "ray/rllib/utils/torch_ops.py"),
+    ("./util/vision_transformer.py", "timm/models/vision_transformer.py")
     ]
 
     copy_files(files_to_copy)
