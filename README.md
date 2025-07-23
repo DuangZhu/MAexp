@@ -52,6 +52,7 @@ $ python add_patch.py -y
 $ pip install tensorboard
 $ pip install einops
 $ pip install open3d
+$ pip install timm==0.3.2
 
 ## if your torch could not work with cuda, you can try this:
 $ pip uninstall torch torchvision torchaudio
