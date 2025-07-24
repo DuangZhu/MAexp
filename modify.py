@@ -20,7 +20,7 @@ def move_file(src, dest):
 
 if __name__ == "__main__":
     files_to_copy = [
-    ("./env_utils/Changed_file/att.yaml", "marllib/marl/models/configs/att.yaml"),
+    ("./env_utils/Changed_file/vit.yaml", "marllib/marl/models/configs/vit.yaml"),
     ("./env_utils/Changed_file/centralized_critic.py", "marllib/marl/algos/utils/centralized_critic.py"),
     ("./env_utils/Changed_file/mappo.py", "marllib/marl/algos/core/CC/mappo.py"),
     ("./env_utils/Changed_file/matrpo.py", "marllib/marl/algos/core/CC/matrpo.py"),
