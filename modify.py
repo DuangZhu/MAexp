@@ -5,13 +5,17 @@ import os
 def get_site_packages_path():
     return site.getsitepackages()[0]
 
+
 def copy_files(files_to_copy):
     site_packages_path = get_site_packages_path()
     for src, dest in files_to_copy:
         full_dest_path = os.path.join(site_packages_path, dest)
+        if not os.path.exists(src):
+            print(f"Source file {src} does not exist, creating an empty file.")
+        os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
         shutil.copyfile(src, full_dest_path)
         print(f"Copied {src} to {full_dest_path}")
-
+        
 def move_file(src, dest):
     site_packages_path = get_site_packages_path()
     full_dest_path = os.path.join(site_packages_path, dest)
