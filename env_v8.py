@@ -733,7 +733,7 @@ def get_config():
     parser.add_argument("--algo", type=str, default = "mappo", choices = ["ippo", "itrpo", "mappo", "matrpo", "vdppo", "vda2c"], help="choice an marl algorithms to train the policy")
     parser.add_argument("--yaml_file", type=str, default = '/remote-home/ums_zhushaohao/new/2024/MAexp/yaml/maze.yaml', help="the yaml file for the experiment parameter")
     parser.add_argument("--result_file", type=str, default = '/remote-home/ums_zhushaohao/new/2024/MAexp/paper3_result/a.json', help="the yaml file for the experiment parameter")
-    parser.add_argument("--testset_path", type=str, default = '/remote-home/ums_zhushaohao/new/2025/MAexp/testset/Final_testdata_mazes_test.pt', help="path to your testset")
+    parser.add_argument("--testset_path", type=str, default = './testset/Final_testdata_mazes_test.pt', help="path to your testset")
     
     """
     map config
