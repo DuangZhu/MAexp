@@ -42,6 +42,7 @@ $ pip install protobuf==3.20.0
 $ pip install scikit-fmm
 $ cd /Path/To/MARLlib/marllib/patch
 $ python add_patch.py -y
+$ pip install marllib
 $ pip install tensorboard
 $ pip install einops
 $ pip install open3d
