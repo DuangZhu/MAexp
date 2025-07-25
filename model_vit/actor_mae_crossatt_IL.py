@@ -104,20 +104,20 @@ class Crossat_actor_il(TorchModelV2, nn.Module):
         self.critic = [self.critic_blocks, ]
         self.actor_initialized_parameters = self.actor_parameters()
         
-        # load pretrain
-        state_dict_before = copy.deepcopy(self.state_dict())
-        # put your path of checkpoint here.
-        pretrained_weights = torch.load('/remote-home/ums_zhushaohao/new/2025/TaskExp/results/20250208_ours_randoms_merge1/checkpoint-0.pth')# ---all loss
+        # # load pretrain
+        # state_dict_before = copy.deepcopy(self.state_dict())
+        # # put your path of checkpoint here.
+        # pretrained_weights = torch.load('/remote-home/ums_zhushaohao/new/2025/TaskExp/results/20250208_ours_randoms_merge1/checkpoint-0.pth')# ---all loss
 
-        matching_keys = [k for k in pretrained_weights['model'] if k in state_dict_before and pretrained_weights['model'][k].size() == state_dict_before[k].size()]
-        self.load_state_dict(pretrained_weights['model'], strict=False)
-        # # 获取加载权重之后的状态字典
-        state_dict_after = self.state_dict()
-        updated_layers = [k for k in matching_keys if not torch.equal(state_dict_before[k], state_dict_after[k])]
-        # # 打印被更新的层的名称
-        print("Updated layers:")
-        for layer in updated_layers:
-            print(layer)
+        # matching_keys = [k for k in pretrained_weights['model'] if k in state_dict_before and pretrained_weights['model'][k].size() == state_dict_before[k].size()]
+        # self.load_state_dict(pretrained_weights['model'], strict=False)
+        # # # 获取加载权重之后的状态字典
+        # state_dict_after = self.state_dict()
+        # updated_layers = [k for k in matching_keys if not torch.equal(state_dict_before[k], state_dict_after[k])]
+        # # # 打印被更新的层的名称
+        # print("Updated layers:")
+        # for layer in updated_layers:
+        #     print(layer)
 
     @override(TorchModelV2)
     def forward(self, input_dict: Dict[str, TensorType],
