@@ -681,14 +681,14 @@ class Multiagent_exploration(MultiAgentEnv):
         load pointcloud map
         """
         if map_count is not None:
-            self.map_freespace = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_freespace.npy")).float().to(self.config['device'])
-            self.map_obstacles = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_obstacles.npy")).float().to(self.config['device'])
-            self.map_boundary = torch.from_numpy(np.load("./map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_boundary.npy")).float().to(self.config['device'])
-            if self.config['scene'] in ['maze', 'random', 'maze9', 'random2','maze_4_change', 'random3']:
+            self.map_freespace = torch.from_numpy(np.load("map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_freespace.npy")).float().to(self.config['device'])
+            self.map_obstacles = torch.from_numpy(np.load("map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_obstacles.npy")).float().to(self.config['device'])
+            self.map_boundary = torch.from_numpy(np.load("map/"+self.config['scene']+"/"+self.config['map_list'][map_count]+"_boundary.npy")).float().to(self.config['device'])
+            if self.config['scene'] in ['maze', 'random', 'maze9', 'random2', 'maze_4_change', 'random3']:
                 self.map_w = torch.tensor(125).to(self.config['device'])
                 self.map_h = torch.tensor(125).to(self.config['device'])
             elif self.config['scene'] == 'indoor':
-                map = np.load("./map/indoor/"+self.config['map_list'][map_count]+"_map.npy")
+                map = np.load("map/indoor/"+self.config['map_list'][map_count]+"_map.npy")
                 self.map_w = torch.tensor(map.shape[0]/2 * self.config['map_resolution'])
                 self.map_h = torch.tensor(map.shape[1]/2 * self.config['map_resolution'])
             elif self.config['scene'] == 'outdoor':
@@ -698,9 +698,9 @@ class Multiagent_exploration(MultiAgentEnv):
             if self.config['scene'] in ['maze', 'random', 'maze9']:
                 self.map_w = torch.tensor(125).to(self.config['device'])
                 self.map_h = torch.tensor(125).to(self.config['device'])
-                self.map_freespace = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_freespace.npy")).float().to(self.config['device'])
-                self.map_obstacles = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_obstacles.npy")).float().to(self.config['device'])
-                self.map_boundary = torch.from_numpy(np.load("./map/"+self.config['scene']+"/map"+str(id)+"_boundary.npy")).float().to(self.config['device'])
+                self.map_freespace = torch.from_numpy(np.load("map/"+self.config['scene']+"/map"+str(id)+"_freespace.npy")).float().to(self.config['device'])
+                self.map_obstacles = torch.from_numpy(np.load("map/"+self.config['scene']+"/map"+str(id)+"_obstacles.npy")).float().to(self.config['device'])
+                self.map_boundary = torch.from_numpy(np.load("map/"+self.config['scene']+"/map"+str(id)+"_boundary.npy")).float().to(self.config['device'])
 
     
     def get_env_info(self):
