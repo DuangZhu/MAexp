@@ -799,7 +799,7 @@ def make_env(
     """
 
     # default config
-    env_config_file_path = '/remote-home/ums_zhushaohao/new/2024/MAexp/yaml/maexp.yaml'
+    env_config_file_path = './yaml/maexp.yaml'
 
     with open(env_config_file_path, "r") as f:
         env_config_dict = yaml.load(f, Loader=yaml.FullLoader)
