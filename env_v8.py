@@ -634,7 +634,7 @@ class Multiagent_exploration(MultiAgentEnv):
         for i, name in enumerate(self.agents_m):
             agent = self.agents_m[name]
             self.car_model[i].points = o3d.utility.Vector3dVector(agent.car_model_mat.cpu() + torch.tensor([0, 0, 0.05]))
-            if i%1 == 0:
+            if i%3 == 0:
                 self.car_model[i].paint_uniform_color([245/255, 108/255, 108/255])
             elif i%3 == 1:
                 self.car_model[i].paint_uniform_color([253/255, 210/255, 224/255])
@@ -900,4 +900,5 @@ if __name__ == '__main__':
 #         env.step(action)
 #     t_end = time.time()
 #     print("Spend time", t_end - t_start)
+
 
