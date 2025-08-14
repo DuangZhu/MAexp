@@ -249,13 +249,6 @@ local_mode=True, num_workers = 0, share_policy='all')
 python env_v8.py --yaml_file ./yaml/maze.yaml
 ```
 
-If you want to save the images, use this:
-
-```
-python env_v8.py --yaml_file ./yaml/maze.yaml --is_capture
-```
-
-
 
 ### Larger swarm
 
