@@ -283,6 +283,7 @@ class Multiagent_exploration(MultiAgentEnv):
                 self.vis.add_geometry(geometry)
             for geometry in self.vis_bound:
                 self.vis.add_geometry(geometry)
+            self.vis.add_geometry(self.goal_point_cloud)
             
             map_obstacles_o3d = o3d.geometry.PointCloud()
             map_obstacles_o3d.points = o3d.utility.Vector3dVector(self.map_obstacles.cpu())
@@ -293,9 +294,9 @@ class Multiagent_exploration(MultiAgentEnv):
             self.explored_space_o3d.points = o3d.utility.Vector3dVector(self.map_freespace.cpu())
             self.vis.add_geometry(self.explored_space_o3d)
             
-            self.map_freespace_o3d = o3d.geometry.PointCloud()
-            self.map_freespace_o3d.points = o3d.utility.Vector3dVector(self.map_freespace.cpu())
-            self.vis.add_geometry(self.map_freespace_o3d)
+            # self.map_freespace_o3d = o3d.geometry.PointCloud()
+            # self.map_freespace_o3d.points = o3d.utility.Vector3dVector(self.map_freespace.cpu())
+            # self.vis.add_geometry(self.map_freespace_o3d)
         return obs
     
     def step(self, action, encoder):
@@ -599,50 +600,45 @@ class Multiagent_exploration(MultiAgentEnv):
         best_action = action[torch.arange(action.size(0)), idxs]
         return best_values, best_action         
     
-    def add_Goal(self,goal):
-        points = np.array(goal.cpu())
-        circle_points = []
-        for point in points:
-            theta1 = np.linspace(0, 2 * np.pi, 100)
-            circle_x = point[0] + np.cos(theta1)*0.2*self.config['map_resolution']
-            circle_y = point[1] + np.sin(theta1)*0.2*self.config['map_resolution']
-            circle_z = np.zeros_like(theta1)
-            circle_points.extend(np.column_stack((circle_x, circle_y, circle_z)))
-
-        circle_points = np.array(circle_points)
-        points_3d = circle_points
-        
-        self.goal_point_cloud.points = o3d.utility.Vector3dVector(points_3d + np.array([0, 0, 0.03]))
-        colors = np.zeros((len(points_3d), 3)) 
-
-
-        colors[:len(points_3d)//3] = [245/255, 108/255, 108/255]
-        colors[len(points_3d)//3:len(points_3d)//3*2] = [253/255, 210/255, 224/255]
-        colors[len(points_3d)//3*2:] = [245/255, 150/255, 125/255]
+    def add_Goal(self, goal):
+        """
+        Add global navigation goals when rendering
+        """
+        N = goal.shape[0]
+        theta1 = torch.linspace(0, 2 * np.pi, 30, device=goal.device)
+        goal_expanded = goal[:, None, :].expand(N, 30, 2)
+        circle_x = goal_expanded[..., 0] + torch.cos(theta1) * 0.2 * self.config['map_resolution']
+        circle_y = goal_expanded[..., 1] + torch.sin(theta1) * 0.2 * self.config['map_resolution']
+        circle_z = torch.zeros((N, 30), device=goal.device)
+        circle_points = torch.stack((circle_x, circle_y, circle_z), dim=-1)
+        circle_points = circle_points.reshape(-1, 3)
+        points_3d = circle_points.cpu().numpy()
+        self.goal_point_cloud.points = o3d.utility.Vector3dVector(points_3d + np.array([0, 0, 0.03]))        
+        colors = np.zeros((N * 30, 3))
+        # colors_list = [[245/255, 108/255, 108/255],
+        # [253/255, 210/255, 224/255],
+        # [245/255, 150/255, 125/255]
+        # ]
+        # for i, color in enumerate(colors_list):
+        #    colors[i * 30:(i + 1) * 30] = color
         self.goal_point_cloud.colors = o3d.utility.Vector3dVector(colors)
-        self.vis.add_geometry(self.goal_point_cloud)     
-
+        self.vis.update_geometry(self.goal_point_cloud)
         
     def render(self):
+        """
+        Visualizing the exploration process when testing
+        """
         self.explored_space_o3d.points = o3d.utility.Vector3dVector(self.explored_space.cpu()+ torch.tensor([0, 0, 0.01]))
         self.explored_space_o3d.paint_uniform_color([197/255, 237/255, 96/255])
-        self.map_freespace_o3d.paint_uniform_color([0.96, 1, 0.71])
-        side_space_o3d = o3d.geometry.PointCloud()
-        side_space_o3d.points = o3d.utility.Vector3dVector(np.array([[0, 0, 0],
-                                                                     [0 , int(torch.max(self.map_obstacles[:,1])), 0],
-                                                                     [int(torch.max(self.map_obstacles[:,0])), 0, 0],
-                                                                     [int(torch.max(self.map_obstacles[:,0])), int(torch.max(self.map_obstacles[:,1])), 0]])) 
-        side_space_o3d.paint_uniform_color([0.6, 0.6, 0.6])
-        self.vis.add_geometry(side_space_o3d)
         self.vis.update_geometry(self.explored_space_o3d)
         for i, name in enumerate(self.agents_m):
             agent = self.agents_m[name]
             self.car_model[i].points = o3d.utility.Vector3dVector(agent.car_model_mat.cpu() + torch.tensor([0, 0, 0.05]))
-            if i == 0:
+            if i%1 == 0:
                 self.car_model[i].paint_uniform_color([245/255, 108/255, 108/255])
-            elif i == 1:
-                self.car_model[i].paint_uniform_color([253/255, 199/255, 209/255])
-            elif i == 2:
+            elif i%3 == 1:
+                self.car_model[i].paint_uniform_color([253/255, 210/255, 224/255])
+            elif i%3 == 2:
                 self.car_model[i].paint_uniform_color([245/255, 150/255, 125/255])
             self.vis_bound[i].points = o3d.utility.Vector3dVector(agent.detected_bound.cpu() + torch.tensor([0, 0, 0.01]))
             self.vis_bound[i].paint_uniform_color([0.6, 0.6, 0.6]) 
@@ -651,22 +647,16 @@ class Multiagent_exploration(MultiAgentEnv):
         self.vis.poll_events()
         self.vis.update_renderer()
         if self.capture:
-            save_path = '/home/shaohao/Documents/MAexp/img'
-            subfolders = ['all', 'agent_0', 'agent_1', 'agent_2']
+            save_path = './imgs'
+            subfolders = ['all']
+            # subfolders = ['all', 'agent_0', 'agent_1', 'agent_2']
             if not os.path.exists(save_path):
+                print('save in: '+ os.getcwd())
                 os.makedirs(save_path)
                 print(f"Folder '{save_path}' created!")
                 for subfolder in subfolders:
                     os.makedirs(os.path.join(save_path, subfolder))
-            else:
-                print(f"Folder '{save_path}' already exists.")
-
             self.save_screenshot()
-            for i in range(self.config['num_agent']):
-                img = self.env_vision['all_agent_map'][i,0].cpu().numpy()
-                img = np.where(img==1,255,0).astype(np.uint8)
-                img = Image.fromarray(img)
-                img.save(f"/home/shaohao/Documents/MAexp/img/agent_{str(i)}/screenshot_{self.infos['local_Steps']}.png")
         return True
    
 
@@ -910,3 +900,4 @@ if __name__ == '__main__':
 #         env.step(action)
 #     t_end = time.time()
 #     print("Spend time", t_end - t_start)
+
