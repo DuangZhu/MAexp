@@ -78,7 +78,7 @@ Ray:  `/Path/To/envs/maexp/lib/python3.8/site-packages/marllib/marl/ray/ray.yaml
 # ray.yaml
 local_mode: False # True for debug mode only
 share_policy: "group" #  individual(separate) / group(division) / all(share)
-evaluation_interval: 50 # evaluate model every 10 training iterations
+evaluation_interval: 50000 # evaluate model every 10 training iterations
 framework: "torch" # only for torch
 num_workers: 0 # thread number
 num_gpus: 1 # gpu to use
